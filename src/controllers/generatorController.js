@@ -13,13 +13,15 @@ exports.generate = async (req, res, next) => {
     await pathWalker.copyBoilerPlate(`../download/${userId}`);
     for(const entity of entities.values()) {
       schema = parser.entityToSchema(entity,entities);
-      await pathWalker.copyTemplateFiles(userId, `../download/`, entity.name, schema);
+      await pathWalker.generateTemplateFiles(userId, entity.name, schema);
     }
     await pathWalker.flush(`../download/`, userId);
+    console.log(`generated for: ${userId} at ${new Date()}`);
     res.send(true);
   } catch (error) {
     console.log(error);
-    next(error);
+    await pathWalker.cleanUp(userId);
+    next(new AppError(500, 'fail', 'failed generation'), req, res, next);
   }
 };
 
@@ -31,6 +33,6 @@ exports.download = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    next(error);
+    next(new AppError(500, 'fail', 'failed download'), req, res, next);
   }
 }

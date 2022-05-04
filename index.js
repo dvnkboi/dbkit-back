@@ -1,17 +1,22 @@
+const pathWalker = require('./src/utils/pathWalker');
+const path = require('path');
 
-
-process.on('uncaughtException', err => {
-    console.log('UNCAUGHT EXCEPTION!!! shutting down...');
+process.on('uncaughtException', async err => {
+    console.log('UNCAUGHT EXCEPTION!!!');
     console.log(err.name, err.message);
-    process.exit(1);
+    await pathWalker.deleteAsync(path.join(__dirname,`./src/download`));
+    await pathWalker.deleteAsync(path.join(__dirname,`./src/stub/tmp`));
+    // process.exit(1);
 });
 
-process.on('unhandledRejection', err => {
-    console.log('UNHANDLED REJECTION!!!  shutting down ...');
+process.on('unhandledRejection', async err => {
+    console.log('UNHANDLED REJECTION!!!');
     console.log(err.name, err.message);
-    server.close(() => {
-        process.exit(1);
-    });
+    await pathWalker.deleteAsync(path.join(__dirname,`./src/download`));
+    await pathWalker.deleteAsync(path.join(__dirname,`./src/stub/tmp`));
+    // server.close(() => {
+    //     process.exit(1);
+    // });
 });
 
 const app = require('./app');
