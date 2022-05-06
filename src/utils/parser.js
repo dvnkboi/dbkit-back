@@ -72,31 +72,32 @@ const parseProperty = (property) => {
         propSchema.required = property.constraints[constraint];
         break;
       case 'unique':
-        if(propSchema.type === String)
+        if(propSchema.type === '__String__')
           propSchema.unique = property.constraints[constraint];
         break;
       case 'min':
-        if(propSchema.type === Number)
+        if(propSchema.type === '__Number__')
           propSchema.min = property.constraints[constraint];
         break;
       case 'max':
-        if(propSchema.type === Number)
+        if(propSchema.type === '__Number__')
           propSchema.max = property.constraints[constraint];
         break;
       case 'enum':
-        if(propSchema.type === String)
+        if(propSchema.type === '__String__')
           propSchema.enum = property.constraints[constraint];
         break;
       case 'minlength':
-        if(propSchema.type === String)
+        if(propSchema.type === '__String__')
           propSchema.minlength = property.constraints[constraint];
         break;
       case 'maxlength':
-        if(propSchema.type === String)
+        if(propSchema.type === '__String__')
           propSchema.maxlength = property.constraints[constraint];
         break;
       case 'selectable':
-        propSchema.select = property.constraints[constraint];
+        if(!property.constraints[constraint])
+          propSchema.select = property.constraints[constraint];
         break;
       default:
         break;

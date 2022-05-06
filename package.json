@@ -8,7 +8,6 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
-    "@alumna/reflect": "^1.0.5",
     "adm-zip": "^0.5.9",
     "cors": "^2.8.5",
     "express": "^4.18.1",
@@ -16,10 +15,9 @@
     "fs-extra": "^10.1.0",
     "helmet": "^5.0.2",
     "hpp": "^0.2.3",
-    "merge-dirs": "^0.2.1",
     "mongoose": "^6.3.2",
-    "replace": "^1.2.1",
-    "replace-in-file": "^6.3.2",
+    "recursive-copy": "^2.0.14",
+    "through2": "^4.0.2",
     "xss-clean": "^0.1.1"
   },
   "nodemonConfig": {
