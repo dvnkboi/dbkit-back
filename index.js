@@ -22,7 +22,7 @@ process.on('unhandledRejection', async err => {
 const app = require('./app');
 
 // Start the server
-const port = 3001;
+const port = 8080;
 app.listen(port, () => {
     console.log(`Application is running on port ${port}`);
 });
